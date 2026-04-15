@@ -6,7 +6,6 @@ from _Framework.MixerComponent import MixerComponent
 from _Framework.ButtonElement import ButtonElement
 from _Framework.EncoderElement import EncoderElement
 from _Framework.SliderElement import SliderElement
-from _Framework.SessionComponent import SessionComponent
 from _Framework.InputControlElement import MIDI_CC_TYPE, MIDI_NOTE_TYPE
 
 # ---------------------------------------------------------------------------
@@ -23,14 +22,13 @@ KNOB_CCS = [35, 41, 44, 45]
 FADER_CCS = [63, 75, 76, 77]
 MASTER_FADER_CC = 62
 
-# Pads for clip launch on channel 2 (12-semitone shift, 3 rows per octave)
-# Octave 1 (notes 48-59):  tracks 1-4,  scenes 1-3
-# Octave 2 (notes 60-71):  tracks 5-8,  scenes 1-3
-# Octave 3 (notes 72-83):  tracks 9-12, scenes 1-3
-# Below octave 1 and above octave 3: pass through to instruments/drum rack
-PAD_CHANNEL = 1
-SESSION_WIDTH = 12
-SESSION_HEIGHT = 3
+# Pads for clip launch on channel 10 (12-semitone shift, 3 rows per octave)
+# Octave 1 (notes 48-59):  tracks 1-4,   scenes 1-3
+# Octave 2 (notes 60-71):  tracks 5-8,   scenes 1-3
+# Octave 3 (notes 72-83):  tracks 9-12,  scenes 1-3
+# Octave 4 (notes 84-95):  tracks 13-16, scenes 1-3
+# Octave 5 (notes 96-107): tracks 17-20, scenes 1-3
+PAD_CHANNEL = 9
 
 # Mod wheel (MW1) — tempo
 TEMPO_CC = 1
@@ -105,7 +103,7 @@ class MaudioCode25(ControlSurface):
 
     def _setup_session(self):
         self._pads = []
-        for note in range(48, 84):
+        for note in range(48, 108):
             block = (note - 48) // 12
             within = (note - 48) % 12
             row = 2 - (within // 4)
